@@ -34,7 +34,21 @@ export const getById = id => {
 }
 
 export const deleteMovie = id => {
-    const numOfMovie = movies.findIndex(id)
-    movies = [...movies.slice(0,numOfMovie), ...movies.slice(numOfMovie+1)]
-    return true
+    const cleanedMovie = movies.filter(movie => movie.id !== id);
+    if(movies.length > cleanedMovie.length){
+      movies = cleanedMovie;
+      return movies
+    }else{
+      return []
+    }
+}
+
+export const addMovies = (name, score) => {
+    const newMovie = {
+      id: `${movies.length+1}`,
+      name,
+      score
+    }
+    movies.push(newMovie)
+    return newMovie
 }
